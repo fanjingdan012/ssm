@@ -1,7 +1,9 @@
 package com.fjd.ssm.controller;
 
+import com.fjd.ssm.tenant.TenantContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,12 +23,16 @@ public class LoginController {
 
 	
 	@RequestMapping(value = "/members/{name}")
-	public Member member(@PathVariable("name") String name){
+	public Member member(@PathVariable("name") String name, @RequestHeader("X-TenantID") String tenantName){
+		TenantContext.setCurrentTenant(tenantName);
 		try {
 			Member member = memberService.login(name, "145");
 			return member;
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.out.println("exception when login");
 			return null;
 		}
 
