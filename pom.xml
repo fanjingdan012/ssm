@@ -4,8 +4,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.fjd</groupId>
-	<artifactId>ssm</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>ssm-tmpl</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ssm template</name>
 	<url>http://maven.apache.org</url>
@@ -88,18 +88,15 @@
 			<version>0.9.5.2</version>
 		</dependency>
 
-		<!-- 数据库 -->
+		<!-- db -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>6.0.6</version>
+			<version>8.0.11</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.sap.db.jdbc</groupId>
-			<artifactId>ngdbc</artifactId>
-			<version>${com.sap.db.jdbc.version}</version>
-		</dependency>
+
+
 
 		<!-- jsp -->
 		<dependency>
@@ -153,7 +150,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>ssm-multi-tenant</finalName>
+		<finalName>ssm</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

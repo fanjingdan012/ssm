@@ -1,6 +1,6 @@
 # Prepare
-- create schemas test(default and tenant1) and test2(tenant2)
-- create table in 2 dbs:sql
+- create db according to application.properties
+- create table in schema test:sql
 ```sql
 CREATE TABLE `member` (
 	`id` BIGINT(20) NULL DEFAULT NULL,
@@ -11,25 +11,14 @@ COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 ```
 - insert some data as you like
+```sql
+insert into member values(2,'fjd','145')
+```
+![db](https://github.com/fanjingdan012/ssm/master/doc/pics/db.png)
+
 # Run it
 - Run SSMApplication.java
-```
-curl --request GET \
-  --url http://localhost:8080//members/shijie2 \
-  --header 'cache-control: no-cache' \
-  --header 'postman-token: 25dff487-3639-2c2b-a00a-2598b7b9281b' \
-  --header 'x-tenantid: tenant2'
-```
-will read from test2 db
-
-```
-curl --request GET \
-  --url http://localhost:8080//members/shijie \
-  --header 'cache-control: no-cache' \
-  --header 'postman-token: 25dff487-3639-2c2b-a00a-2598b7b9281b' \
-  --header 'x-tenantid: tenant1'
-```
-will read from test db
-
-# Code
-See `MultitenantDataSource.java` extended from `AbstractRoutingDataSource`, calling determineCurrentLookupKey() to determin DataSource dynamicly
+- visit http://localhost:8080/members/fjd
+- visit http://localhost:8080/hello
+- visit http://localhost:8080/actuator/health
+![membersfjd](https://github.com/fanjingdan012/ssm/master/doc/pics/membersfjd.png)
