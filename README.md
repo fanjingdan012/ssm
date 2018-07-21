@@ -1,4 +1,5 @@
 # Prepare
+- change db password in application.properties
 - create db according to application.properties
 - create table in schema test:sql
 ```sql
@@ -14,11 +15,11 @@ ENGINE=InnoDB;
 ```sql
 insert into member values(2,'fjd','145')
 ```
-![db](https://github.com/fanjingdan012/ssm/master/doc/pics/db.png)
+![db](https://github.com/fanjingdan012/ssm/blob/master/doc/pics/db.png)
 
 # Run it
 - Run SSMApplication.java
 - visit http://localhost:8080/members/fjd
 - visit http://localhost:8080/hello
 - visit http://localhost:8080/actuator/health
-![membersfjd](https://github.com/fanjingdan012/ssm/master/doc/pics/membersfjd.png)
+![membersfjd](https://github.com/fanjingdan012/ssm/blob/master/doc/pics/membersfjd.png)
