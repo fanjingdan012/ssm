@@ -16,18 +16,24 @@ ENGINE=InnoDB;
 insert into member values(1,'fjd','145')
 insert into member values(2,'fjd','145')
 ```
-![db-multi-datasource](https://github.com/fanjingdan012/ssm/blob/multi-data-source/doc/pics/db-multi-datasource.png)
+![db-multi-datasource](https://github.com/fanjingdan012/ssm/blob/multi-tenant/doc/pics/db-multi-datasource.png)
 
 # Run it
 - Run SSMApplication.java
 - visit http://localhost:8080/hello
 - visit http://localhost:8080/actuator/health
 - visit http://localhost:8080//members/fjd with headers
+- visit http://localhost:8080/api/tenant/register?username=root&password=123456&url=jdbc:mysql://localhost/test2&tenantName=tenant2
+```
+curl -X GET \
+  'http://localhost:8080/api/tenant/register?username=root&password=123456&url=jdbc:mysql://localhost/test2&tenantName=tenant2' \
+  -H 'Cache-Control: no-cache'
+```
+will register a new tenant(new datasource)
 ```
 curl --request GET \
-  --url http://localhost:8080//members/fjd \
+  --url http://localhost:8080/members/fjd \
   --header 'cache-control: no-cache' \
-  --header 'postman-token: 25dff487-3639-2c2b-a00a-2598b7b9281b' \
   --header 'x-tenantid: tenant1'
 ```
 will read from test db
@@ -36,15 +42,15 @@ will read from test db
 curl --request GET \
   --url http://localhost:8080//members/shijie \
   --header 'cache-control: no-cache' \
-  --header 'postman-token: 25dff487-3639-2c2b-a00a-2598b7b9281b' \
   --header 'x-tenantid: tenant2'
 ```
 will read from test2 db
-![membersfjd-multi-datasource](https://github.com/fanjingdan012/ssm/blob/multi-data-source/doc/pics/membersfjd-multi-datasource.png)
+![membersfjd-multi-tenant](https://github.com/fanjingdan012/ssm/blob/multi-tenant/doc/pics/membersfjd-multitenant.png)
 
-#Core code
+# Core code
 - `MultitenantConfiguration.java`
 - `MultitenantDataSource.java` (`extends AbstractRoutingDataSource`)
+- `MultitenantDataSourceRegister` (@Imported by MultitenantConfiguration)
 
-#Other versions
+# Other versions
 - see other branches
